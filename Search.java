@@ -24,11 +24,19 @@ public class Search {
             return binarySearch(searchArray,searchElement,low,mid - 1);
             // Go to right
         } else if (searchElement > searchArray[mid]) {
-            return binarySearch(searchArray,searchElement,mid + 1,hi);
+            return binarySearch(searchArray,searchElement,mid,hi);
         } else {
+            if (mid > 0) {
+                if (searchArray[mid - 1] == searchElement) {
+                    return binarySearch(searchArray,searchElement,low,mid - 1);
+                }
+            }
             assert (searchElement == searchArray[mid]);
+
             return mid;
+
         }
+
 
 
 //        return -1; // not found
@@ -46,8 +54,6 @@ public class Search {
         // The last element to consider
         // only one element
         if (low == hi) {
-            System.err.println(searchArray[low]);
-            System.err.println(searchElement);
             if (searchArray[low] == searchElement) {
                 return low;
             } else {
@@ -59,11 +65,15 @@ public class Search {
         if (searchElement < searchArray[mid]) {
             return binarySearch(searchArray,searchElement,low,mid - 1);
         } else if (searchElement > searchArray[mid]) {
-            return binarySearch(searchArray,searchElement,mid + 1,hi);
+            return binarySearch(searchArray,searchElement,mid,hi);
         } else {
+            if (mid > 0) {
+                if (searchArray[mid - 1] == searchElement) {
+                    return binarySearch(searchArray,searchElement,low,mid - 1);
+                }
+            }
             assert (searchElement == searchArray[mid]);
             return mid;
         }
-//        return -1;// not makes sense
     }
 }
