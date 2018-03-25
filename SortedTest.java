@@ -25,5 +25,44 @@ class SortedTest {
             assertTrue(array[i] == arraySorted[i]);
         }
     }
+    @Test
+    void bottomUpMergeSortedInteger() {
+
+    }
+    @Test
+    void selectionSorted() {
+        int[] array = {5,7,1,2,4,6,0};
+        int[] arraySorted = {0,1,2,4,5,6,7};
+        Sorted theSorted = new Sorted();
+        theSorted.selectionSorted(array);
+        for (int i = 0; i < array.length; i++) {
+            System.err.println(array[i]);
+            System.err.println(arraySorted[i]);
+            assertTrue(array[i] == arraySorted[i]);
+        }
+
+    }
+
+    @Test
+    void shellSorted(){
+        int[] array = {5,7,1,2,4,6,0};
+        int[] arraySorted = {0,1,2,4,5,6,7};
+        Sorted theSorted = new Sorted();
+        theSorted.shellSorted(array);
+        for (int i = 0; i < array.length; i++) {
+            assertTrue(array[i] == arraySorted[i]);
+        }
+    }
+
+    @Test
+    void threeWayQuickSorted() {
+        int[] array = {5,7,1,2,4,6,0};
+        int[] arraySorted = {0,1,2,4,5,6,7};
+        Sorted theSorted = new Sorted();
+        theSorted.threeWayQuickSorted(array);
+        for (int i = 0; i < array.length; i++) {
+            assertTrue(array[i] == arraySorted[i]);
+        }
+    }
 
 }
