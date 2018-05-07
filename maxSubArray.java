@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class maxSubArray {
@@ -54,47 +58,55 @@ public class maxSubArray {
         return maxSum;
     }
 
+    /**
+     *
+     * @param nums
+     * @return
+     * The cons here is that when the maximum is negative, the subsequences is
+     * only possible of maxSum. Why, since when all negative in arrays, the only
+     * way to get the maxSum is the the largest negative numbers. 
+     */
     public static int[] maxSubArrayWithIndexSubsequences(int[] nums) {
         // TODO there is still bugs on hackerrank but I am not sure how
+        // The maximum Subarrays is correct, but the value is not enough
+        // in the subsequences
         // Keeping track of the maximum sub arrays.
         // I wonder what happends when all element is negative ?
         int size = nums.length;
         int currentSum = nums[0];
         int maxSum = nums[0];
         int start=0, end=-1;
-        int subsequences=maxSum;
+        int subsequences = 0;
+//        int negativeSubsequences;
+        if(maxSum > 0) subsequences = maxSum;
+//        else negativeSubsequences = maxSum;
         for(int j = 1; j < size; j++) {
+
             int nextValue =  nums[j];
+            if(nextValue > 0) {
+                subsequences += nextValue;
+            }
+
+
             if(currentSum + nextValue < nextValue)
             {
                 currentSum = nextValue;
                 start = j;
-                if(nextValue > subsequences ) subsequences = nextValue;
-                // update the maxSum
-                if(currentSum > maxSum){
-                    maxSum = currentSum;
-                    end = j;
-                }
             }
-            else
-            {
-                currentSum += nextValue;
-                // update the maxSum
-                if(currentSum > maxSum){
-                    maxSum = currentSum;
-                    end = j;
-                    if(nextValue > 0) subsequences += nextValue;
-                }
+            else currentSum += nextValue;
+            // update the maxSum
+            if(currentSum > maxSum){
+                maxSum = currentSum;
+                end = j;
             }
         }
+        if(subsequences == 0 && maxSum < 0) subsequences = maxSum;
         int[] maxSumAndMaxSubsequences = {maxSum,subsequences};
-        System.err.println("start " +start);
-        System.err.println("end " + end);
         return maxSumAndMaxSubsequences;
     }
 
 
-    public static void main(String agrs[]) {
+    public static void main(String agrs[]) throws FileNotFoundException {
 //        int[] nums = {-1,-2};
 ////        System.out.println(maxSubArray(nums));
 //
@@ -115,15 +127,30 @@ public class maxSubArray {
 //            System.out.println(maxSumAndMaxSubsequences2[i]);
 //        }
 //
-//        int[] subSequences3 = {-4,-3,-2,-1};
-//        int[] maxSumAndMaxSubsequences3 = maxSubArrayWithIndexSubsequences(subSequences3);
-//        for(int i = 0; i < maxSumAndMaxSubsequences3.length; i++) {
-//            System.out.println(maxSumAndMaxSubsequences3[i]);
-//        }
+        int[] subSequences3 = {-4,-3,-2,-1};
+        int[] maxSumAndMaxSubsequences3 = maxSubArrayWithIndexSubsequences(subSequences3);
+        for(int i = 0; i < maxSumAndMaxSubsequences3.length; i++) {
+            System.out.println(maxSumAndMaxSubsequences3[i]);
+        }
+
+        int[] subSequences4 = {1,2,3,4};
+        int[] maxSumAndMaxSubsequences4 = maxSubArrayWithIndexSubsequences(subSequences4);
+        for(int i = 0; i < maxSumAndMaxSubsequences4.length; i++) {
+            System.out.println(maxSumAndMaxSubsequences4[i]);
+        }
+        // They want to max when negative also
+        int[] subSequences5 = {-100,-1};
+        int[] maxSumAndMaxSubsequences5 = maxSubArrayWithIndexSubsequences(subSequences5);
+        for(int i = 0; i < maxSumAndMaxSubsequences5.length; i++) {
+            System.out.println(maxSumAndMaxSubsequences5[i]);
+        }
         // Test case of hacker ranks
 //        System.err.println(agrs[1]);
 //        String fileName = agrs[0];
-        Scanner in = new Scanner("E:\\PersonalProjectGitHub\\Personal-Projects-I\\" +"input01_maximum_subArrays_AndSequence.txt");
+        Scanner in  = new Scanner(new File("E:\\PersonalProjectGitHub\\Personal-Projects-I\\input01_maximum_subArrays_AndSequence.txt"));
+
+
+
         int t = in.nextInt();
         for(int a0 = 0; a0 < t; a0++){
             int n = in.nextInt();
@@ -138,7 +165,9 @@ public class maxSubArray {
             System.out.println("");
 
         }
-        in.close();
+
+
+
 
 
     }
