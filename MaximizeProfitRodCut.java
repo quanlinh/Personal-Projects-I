@@ -26,10 +26,8 @@ public class MaximizeProfitRodCut {
             int maxRevenueOnNextCut = Integer.MIN_VALUE;
             for (int contagiousCutSize = 1; contagiousCutSize <= firstCutSize; contagiousCutSize++)
             {
-
                 if(maxRevenueOnNextCut < priceTable[contagiousCutSize] + optimalRodCutSize[firstCutSize-contagiousCutSize][0])
                 {
-
                     maxRevenueOnNextCut = priceTable[contagiousCutSize] + optimalRodCutSize[firstCutSize-contagiousCutSize][0];
                     optimalRodCutSize[firstCutSize][1] = contagiousCutSize;
                 }

@@ -129,6 +129,36 @@ public class ArrayProcess {
         return i+1;
     }
 
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        int N = nums.length;
+        for (int i = 1; i < N; i++) {
+            if(nums[i] == nums[i-1]) return true;
+        }
+        return false;
+    }
+
+    /**
+     *  using the same technique in merge of merge short
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        if(n == 0) return;
+        int[] tempArray = new int[m];
+        for(int k = 0; k < m; k++)
+            tempArray[k] = nums1[k];
+
+        int i = 0, j = 0, k = 0;
+        while(k < m+n) {
+            if (i == m)                         nums1[k++] = nums2[j++];
+            else if (j == n)                    nums1[k++] = tempArray[i++];
+            else if(tempArray[i] > nums2[j])    nums1[k++] = nums2[j++];
+            else                                nums1[k++] = tempArray[i++];
+        }
+    }
 
 
 }

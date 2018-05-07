@@ -78,7 +78,7 @@ public class Sorted {
     }
 
     /**
-     * This is the bottom up mergeSort strategy learn from Coursera Algo offers by Princinton
+     * This is the bottom up mergeSort strategy learn from Coursera Algo offers by Princeton
      * @param array the array need to be sort
      * concise industrial-strength code, if you have space.
      * Pass through array, merging subarrays of size 1.
